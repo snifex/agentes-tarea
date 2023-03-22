@@ -5,3 +5,9 @@
     gap: 1rem;
 }
 
+
+.controlButtons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
