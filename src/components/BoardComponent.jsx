@@ -1,28 +1,34 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const BoardComponent = ({numberRows}) => {
-    const [board, setBoard] = useState(Array(numberRows).fill(Array(numberRows).fill("X")))
+export const BoardComponent = ({ board, handleFirstTime, handleRandomize}) => {
+    const imgGarbage = (
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/garbage-bag-icon.png" alt="Imagen basura" id="img" />
+        );
 
-    return (
-        <div className="board">
-            {board.map((row, rowIndex) => (
-                <div key={rowIndex} className="row">
-                    {row.map((cell, colIndex) => (
-                        <div
-                            key={`${rowIndex}-${colIndex}`}
-                            className="cell"
-                        >
-                            {cell}
-                        </div>
-                    ))}
-                    
-                </div>
-            ))}
-        </div>
-    );
+        useEffect(() => {
+            handleFirstTime()
+        }, [])
+
+        return (
+            <div className="board">
+                {board.map((row, rowIndex) => (
+                    <div key={rowIndex} className="row">
+                        {row.map((cell, colIndex) => (
+                            <div
+                                key={`${rowIndex}-${colIndex}`}
+                                className="cell"
+                            >
+                                { cell.hasGarbage === true ? imgGarbage : `X` }
+                            </div>
+                        ))}
+
+                    </div>
+                ))}
+            </div>
+        );
 }
 
 BoardComponent.propTypes = {
-    numberRows: PropTypes.number.isRequired
+    board: PropTypes.array.isRequired
 }

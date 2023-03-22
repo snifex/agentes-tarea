@@ -1,18 +1,28 @@
 import { useStopwatch } from "../hooks/useStopwatch"
 
-export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePauseResume, isActive }) => {
+export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePauseResume, isActive, handleRandomize, handleNewBoard }) => {
+
+    const resetBoard = () => {
+        handleReset();
+        handleNewBoard();
+    };
+
+    const startBoard = () => {
+        handleStart();
+        handleRandomize();
+    };
 
     const StartButton = (
       <div>
-        <button onClick={ handleStart }>Iniciar</button>
+        <button onClick={ startBoard }>Iniciar</button>
       </div>  
     );
 
     const ActiveButtons = (
         <div className="controlContainer">
-            <button >Colocar basura</button>
+            <button onClick={ handleRandomize }>Colocar basura</button>
             <button onClick={ handlePauseResume } >{isPaused ? "Continuar" : "Pausa"}</button>
-            <button onClick={ handleReset }>Nuevo</button>
+            <button onClick={ resetBoard }>Nuevo</button>
         </div>
     );
 
