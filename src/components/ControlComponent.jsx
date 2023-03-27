@@ -2,7 +2,7 @@ import { useCleaning } from "../hooks/useCleaning";
 
 
 export const ControlComponent = ({ handleStart, handleStop , handleReset, isActive, handleRandomize, handleNewBoard, garbageCounter, setCoordinates, decrementGarbage, board, generateDirection, xCoordinate, yCoordinate, resetCounter }) => {
-    const [startCleaning, stopCleaning] = useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop);
+    const [startCleaning, stopCleaning] = useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop, resetCounter);
 
     const resetBoard = () => {
         handleReset();
@@ -12,6 +12,7 @@ export const ControlComponent = ({ handleStart, handleStop , handleReset, isActi
     };
 
     const startingBoard = () => {
+        handleReset();
         handleStart();
         handleRandomize();
         startCleaning();

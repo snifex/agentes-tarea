@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 
-export function useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop) {
+export function useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop, resetCounter) {
     const [isUsing, setIsUsing] = useState(false);
     
 
     useEffect(() => {           
         let idInterval;
-
         if (isUsing) {
             idInterval = setInterval(() => {
                 if (garbageCounter === 0) {
-                    setIsUsing(false);
+                    resetCleaning();
                     return;
                 }
 
@@ -44,10 +43,17 @@ export function useCleaning(garbageCounter, decrementGarbage, generateDirection,
         return () => {
             clearInterval(idInterval);
         }
+
     }, [isUsing, garbageCounter, xCoordinate, yCoordinate]);
 
     function startCleaning() {
         setIsUsing(true);
+    }
+
+    const resetCleaning = () => {
+        setIsUsing(false);
+        handleStop();
+        resetCounter();
     }
 
     const stopCleaning = () => {
