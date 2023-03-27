@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-export const BoardComponent = ({ board, handleFirstTime, xCoordinate, yCoordinate, handleInitialPosition, setIsCleaning, garbageCounter, generateDirection, setCoordinates, decrementGarbage, isCleaning}) => {
+export const BoardComponent = ({ board, handleFirstTime, xCoordinate, yCoordinate, handleInitialPosition}) => {
     const imgGarbage = (
         <img src="https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/garbage-bag-icon.png" alt="Imagen basura" id="img" />
     );
@@ -30,7 +30,7 @@ export const BoardComponent = ({ board, handleFirstTime, xCoordinate, yCoordinat
                                     imgVacuum :
                                     cell.hasGarbage === true ? 
                                         imgGarbage : 
-                                        "X"
+                                        ""
                             }
                         </div>
                     ))}

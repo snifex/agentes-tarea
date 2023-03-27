@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export function useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board) {
+export function useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop) {
     const [isUsing, setIsUsing] = useState(false);
     
 
-    useEffect(() => {
+    useEffect(() => {           
         let idInterval;
 
         if (isUsing) {
@@ -38,16 +38,21 @@ export function useCleaning(garbageCounter, decrementGarbage, generateDirection,
                     board[xCoordinate][yCoordinate].hasGarbage = false;
                     decrementGarbage();
                 }
-                //Limpiar basuras y mover este useEffect en el custom hook,pausar
             }, 100);
         }
 
-        return () => clearInterval(idInterval);
-    }, [isUsing, garbageCounter, xCoordinate, yCoordinate, decrementGarbage]);
+        return () => {
+            clearInterval(idInterval);
+        }
+    }, [isUsing, garbageCounter, xCoordinate, yCoordinate]);
 
     function startCleaning() {
         setIsUsing(true);
     }
 
-    return [startCleaning];
+    const stopCleaning = () => {
+        setIsUsing(false);
+    }
+
+    return [startCleaning, stopCleaning];
 }

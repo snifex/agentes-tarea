@@ -8,7 +8,7 @@ export const useStopwatch = () => {
 
     useEffect(() => {
         if (isRunning) {
-          requestRef.current = requestAnimationFrame(updateTime);
+            requestRef.current = requestAnimationFrame(updateTime);
         }
         return () => cancelAnimationFrame(requestRef.current);
     }, [isRunning]);
@@ -52,6 +52,6 @@ export const useStopwatch = () => {
         isRunning,
         handleStart,
         handleStop,
-        handleReset
+        handleReset,
     }
 }

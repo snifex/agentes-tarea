@@ -1,13 +1,14 @@
 import { useCleaning } from "../hooks/useCleaning";
 
 
-export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePauseResume, isActive, handleRandomize, handleNewBoard, garbageCounter, setCoordinates, decrementGarbage, board, generateDirection, xCoordinate, yCoordinate }) => {
-    const [startCleaning] = useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board);
+export const ControlComponent = ({ handleStart, handleStop , handleReset, isActive, handleRandomize, handleNewBoard, garbageCounter, setCoordinates, decrementGarbage, board, generateDirection, xCoordinate, yCoordinate, resetCounter }) => {
+    const [startCleaning, stopCleaning] = useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board, handleStop);
 
     const resetBoard = () => {
         handleReset();
         handleNewBoard();
-        
+        resetCounter();
+        stopCleaning();
     };
 
     const startingBoard = () => {
@@ -16,6 +17,12 @@ export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePa
         startCleaning();
     };
 
+
+    const randomizeBoard = () => {
+        handleRandomize();
+        resetCounter();
+        startCleaning();
+    }
     
     const StartButton = (
       <div>
@@ -25,8 +32,7 @@ export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePa
 
     const ActiveButtons = (
         <div className="controlContainer">
-            <button onClick={ handleRandomize }>Colocar basura</button>
-            <button onClick={ handlePauseResume } >{isPaused ? "Continuar" : "Pausa"}</button>
+            <button onClick={ randomizeBoard }>Colocar basura</button>
             <button onClick={ resetBoard }>Nuevo</button>
         </div>
     );

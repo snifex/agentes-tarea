@@ -3,13 +3,13 @@ import { ScoreboardComponent } from './ScoreboardComponent'
 import { ControlComponent } from './ControlComponent'
 import { useStopwatch } from '../hooks/useStopwatch'
 import { useRandomizeGarbage } from '../hooks/useRandomizeGarbage'
-import { useVacuum } from '../hooks/useVacuum'
+import { useVacuum } from '../hooks/useVacuum';
 
 export const App = () => {
     const { isRunning, handleStop , handleReset, handleStart , time} = useStopwatch()
     const { board, handleRandomize, handleEmptyBoard, resetCounter, counter, decrementCounter} = useRandomizeGarbage()
     const { xCoordinate, yCoordinate, generateDirection, handleInitialPosition, startCleaning, setIsUsing, isUsing, setCoordinates } = useVacuum();
-
+    
     return (
         <>
             <ScoreboardComponent
@@ -21,19 +21,13 @@ export const App = () => {
                 handleFirstTime = { handleEmptyBoard }
                 xCoordinate = { xCoordinate }
                 yCoordinate = { yCoordinate }
-                generateDirection = { generateDirection }
                 handleInitialPosition = { handleInitialPosition }
-                garbageCounter = { counter }
-                decrementGarbage = { decrementCounter }
-                setCoordinates = { setCoordinates }
-                isCleaning = { isUsing }
-                setIsCleaning = { setIsUsing }
             />
             <ControlComponent
                 isActive = { isRunning }
                 handleReset = { handleReset }
                 handleStart = { handleStart }
-                handlePauseResume = { handleStop }
+                handleStop = { handleStop }
                 handleRandomize = { handleRandomize }
                 handleNewBoard = { handleEmptyBoard }
                 startCleaning = { startCleaning }
@@ -46,7 +40,7 @@ export const App = () => {
                 generateDirection={generateDirection}
                 xCoordinate={ xCoordinate }
                 yCoordinate={ yCoordinate }
-                board = { board}
+                board = { board }
             />
         </>
         

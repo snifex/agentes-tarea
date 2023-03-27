@@ -6,7 +6,7 @@ export const ScoreboardComponent = ({ time, counter } ) => {
     return (
         <div className="scoreboard">
             <div className="score">
-                <h3>Basuras removidas</h3>
+                <h3>Basuras restantes</h3>
                 <p>{ counter }</p>
             </div>
             
