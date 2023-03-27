@@ -1,46 +1,57 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export const useStopwatch = () => {
-    const [time, setTime] = useState(0);
-    const [isActive, setIsActive] = useState(false);
-    const [isPaused, setIsPaused] = useState(true);
+    const [time, setTime] = useState({ minutes: 0, seconds: 0, centiseconds: 0 });
+    const [isRunning, setIsRunning] = useState(false);
+    const requestRef = useRef();
+
 
     useEffect(() => {
-        let interval = null;
+        if (isRunning) {
+          requestRef.current = requestAnimationFrame(updateTime);
+        }
+        return () => cancelAnimationFrame(requestRef.current);
+    }, [isRunning]);
 
-        if (isActive && isPaused === false){
-            interval = setInterval(() => {
-                setTime((time) => time + 10);
-            }, 10);
-        } else {
-            clearInterval(interval);
-        }
-    
-        return () => {
-            clearInterval(interval);
-        }
-    }, [isActive, isPaused])
-    
+    const updateTime = () => {
+        setTime((prevTime) => {
+            let newCentiseconds = prevTime.centiseconds + 1;
+            let newSeconds = prevTime.seconds;
+            let newMinutes = prevTime.minutes;
+        
+            if (newCentiseconds === 100) {
+                newCentiseconds = 0;
+                newSeconds += 1;
+            }
+        
+            if (newSeconds === 60) {
+                newSeconds = 0;
+                newMinutes += 1;
+            }
+        
+            return { minutes: newMinutes, seconds: newSeconds, centiseconds: newCentiseconds };
+        });
+        requestRef.current = requestAnimationFrame(updateTime);
+    }
+
     const handleStart = () => {
-        setIsActive(true);
-        setIsPaused(false);
-    };
-      
-    const handlePauseResume = () => {
-        setIsPaused(!isPaused);
-    };
-      
+        setIsRunning(true);
+      }
+    
+    const handleStop = () => {
+        setIsRunning(false);
+    }
+    
     const handleReset = () => {
-        setIsActive(false);
-        setTime(0);
-    };
+        setIsRunning(false);
+        setTime({ minutes: 0, seconds: 0, centiseconds: 0 });
+    }
 
     return {
-        handleStart,
-        handleReset,
-        handlePauseResume,
         time,
-        isActive,
-        isPaused
+        isRunning,
+        handleStart,
+        handleStop,
+        handleReset
     }
 }

@@ -1,20 +1,25 @@
-import { useStopwatch } from "../hooks/useStopwatch"
+import { useCleaning } from "../hooks/useCleaning";
 
-export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePauseResume, isActive, handleRandomize, handleNewBoard }) => {
+
+export const ControlComponent = ({ handleStart, handleReset, isPaused , handlePauseResume, isActive, handleRandomize, handleNewBoard, garbageCounter, setCoordinates, decrementGarbage, board, generateDirection, xCoordinate, yCoordinate }) => {
+    const [startCleaning] = useCleaning(garbageCounter, decrementGarbage, generateDirection, xCoordinate, yCoordinate, setCoordinates, board);
 
     const resetBoard = () => {
         handleReset();
         handleNewBoard();
+        
     };
 
-    const startBoard = () => {
+    const startingBoard = () => {
         handleStart();
         handleRandomize();
+        startCleaning();
     };
 
+    
     const StartButton = (
       <div>
-        <button onClick={ startBoard }>Iniciar</button>
+        <button onClick={ startingBoard }>Iniciar</button>
       </div>  
     );
 

@@ -1,18 +1,33 @@
 import { useState } from "react";
+import { useCounter } from "./useCounter";
+
 
 export const useRandomizeGarbage = () => {
     const [board, setBoard] = useState([]);
+    const [garbages, setGarbages] = useState( new Set());
+    const { counter, incrementCounter, resetCounter, decrementCounter } = useCounter(12);
+
+    const generateRandomNumbers = () => {
+        const nums = new Set();
+        while(nums.size !== 12){
+            nums.add(Math.floor(Math.random() * (36 - 2 + 1) + 2))
+        } 
+        setGarbages(nums);
+    }
 
     const handleRandomize = () => {
-        let objectCount = Math.floor(Math.random() * (13 - 9 + 1) + 9);
+        let contador = 0;
+        
+        generateRandomNumbers();
+        
         const newMatrix = [];
 
         for (let i = 0; i < 6; i++) {
             const row = [];
             for (let j = 0; j < 6; j++) {
-                if ( Math.random() * .5 < objectCount / 36) {
+                contador++;
+                if ( garbages.has(contador) ) {
                     row.push({ "hasGarbage": true });
-                    objectCount--;
                 } else {
                     row.push({ "hasGarbage": false });
                 }   
@@ -24,6 +39,7 @@ export const useRandomizeGarbage = () => {
     }; 
 
     const handleEmptyBoard = () => {
+        generateRandomNumbers();
         const newMatrix = [];
 
         for (let i = 0; i < 6; i++) {
@@ -40,6 +56,10 @@ export const useRandomizeGarbage = () => {
     return {
         board,
         handleRandomize,
-        handleEmptyBoard
+        handleEmptyBoard,
+        counter,
+        resetCounter,
+        decrementCounter,
+        setBoard
     }
 }

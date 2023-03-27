@@ -10,6 +10,15 @@
     grid-template-rows: repeat(6, 1fr);
     margin-bottom: 1rem;
     max-width: 1280px;
+    background-color:silver;
+    background-image:
+        radial-gradient(circle at 100% 150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
+        radial-gradient(circle at 0    150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
+        radial-gradient(circle at 50%  100%, white 10%, silver 10%, silver 23%, white 23%, white 30%, silver 30%, silver 43%, white 43%, white 50%, silver 50%, silver 63%, white 63%, white 71%, transparent 71%, transparent),
+        radial-gradient(circle at 100% 50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent),
+        radial-gradient(circle at 0    50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent);
+    background-size: 100px 50px;
+    border: 1px solid #000;
 }
   
 .row{
@@ -18,13 +27,18 @@
 }
   
 .cell{
-    background-color: #7daa6b;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     padding: 2.2rem;
     text-align: center;
     font-size: 24px;
+    color: #000;
 }
 
 #img{
     width: 2.2rem;
+}
+
+#img_vacuum{
+    width: 1.8rem;
+    mix-blend-mode: multiply;  
 }
