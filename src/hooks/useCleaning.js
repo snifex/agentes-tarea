@@ -38,7 +38,7 @@ export function useCleaning(garbageCounter, decrementGarbage, generateDirection,
                     board[xCoordinate][yCoordinate].hasGarbage = false;
                     decrementGarbage();
                 }
-            }, 100);
+            }, 200);
         }
 
         return () => {

@@ -7,7 +7,7 @@ export const BoardComponent = ({ board, handleFirstTime, xCoordinate, yCoordinat
     );
 
     const imgVacuum = (
-        <img src="https://www.vhv.rs/dpng/d/431-4313009_vacuum-cleaner-png-vacuum-clipart-png-transparent-png.png" alt="aspiradora" id="img_vacuum"/>
+        <img src="https://static.vecteezy.com/system/resources/previews/014/456/386/original/vacuum-green-purple-free-png.png" alt="aspiradora" id="img_vacuum"/>
     );
 
     useEffect(() => {

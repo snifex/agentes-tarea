@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useCleaning } from "./useCleaning";
 
 export const useVacuum = () => {
     const [coordinates, setCoordinates] = useState({
